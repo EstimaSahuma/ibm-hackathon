@@ -15,28 +15,22 @@ def prompt_open_account(user_msg: str, idioma: str = 'pt') -> str:
         """
     
     if idioma == 'kimbundu':
-        return f"""Traduza a seguinte frase para Kimbundu e depois explique como abrir uma conta rural: "{user_msg}"
+        return f"""Mwana nyi okamba: "{user_msg}"
 
-                    Exemplo:
-                    Português: Para abrir uma conta, leve seu BI ou Cartão de Agricultor.
-                    Kimbundu: K’u sole kufuta conta, kalukila BI wela kartão dia mufundi.
+                    Olongi okuti o muntu alonge ombanka oco ku BI o Cartão de Agricultor
                 """
 
     if idioma == 'umbundu':
-        return f"""Traduza para Umbundu e explique como abrir uma conta com BI ou Cartão de Agricultor:
+        return f"""Olongi ulomboloka:
                     \"{user_msg}\"
 
-                    Exemplo:
-                    Português: Leve seu BI ou Cartão de Agricultor.
-                    Umbundu: Feteka okuti BI wela ekartão lyocikola.
+                    Ohandi etavo okuti okuti ove okutilongela ombanka vali ku BI o Cartão de Agricultor.
                 """
 
     if idioma == 'kikongo':
-        return f"""Explique em Kikongo como abrir uma conta bancária com BI ou cartão de agricultor: \"{user_msg}\"
+        return f"""Mbongi widi: \"{user_msg}\"
 
-                    Exemplo:
-                    Português: Para abrir uma conta, traga seu documento.
-                    Kikongo: Kana kufungula compte, lela na documentu yako.
+                    Ndinga ya kukebuka konta ya banki na BI to Kartãu ya Bantu ya bilanga.
                 """
 
     return f"""O camponês diz: \"{user_msg}\"
@@ -53,16 +47,24 @@ def prompt_agri_credit(user_msg: str, idioma: str = 'pt') -> str:
     
     if idioma == 'kimbundu':
         return f"""
-                    Traduza a frase e explique em Kimbundu como pedir crédito agrícola com documentos mínimos: \"{user_msg}\"
+                    Mwana nyi okamba: \"{user_msg}\"
+                    
+                    Zimba muntu otinxi dodolo dia kudihola kredi ya kulima, karinyina mona, makalata no kasuwa kesomba
                 """
 
     if idioma == 'umbundu':
         return f"""
-                    Explique em Umbundu como funciona o crédito agrícola e quais documentos são necessários: \"{user_msg}\"
+                    Olongi ulomboloka: \"{user_msg}\"
+                    
+                    Omunhu omaza okula okuposa kredi ya wingi wa kupangalapangwa, kwenda konta, epasa yange ya epasha, na silaka.
                 """
 
     if idioma == 'kikongo':
-        return f"""Explique como o camponês pode conseguir crédito agrícola em Kikongo, com linguagem acessível: \"{user_msg}\""""
+        return f"""
+                Mbongi widi: \"{user_msg}\"
+                
+                Moto yina ke ka diela kredi ya banzadi ya nzenza, mefuna ID, luzingu, mipanda ne biloko biye baleta.
+            """
 
     return f"""O agricultor diz: \"{user_msg}\"
 
@@ -85,7 +87,19 @@ def prompt_financial_education(topico: str, idioma: str = 'pt') -> str:
     if idioma == 'en':
         return f"""Explain the concept \"{topico}\" in simple English, using rural/agriculture-related examples."""
 
-    if idioma in ['kimbundu', 'umbundu', 'kikongo']:
-        return f"""Explique o seguinte conceito em {idioma.upper()}, de forma simples e com exemplos agrícolas: \"{topico}\""""
+    if idioma == 'kimbundu':
+        return f"""
+                    Tulangulula kwa mukongo owa mesu kakululuka, diambu yai: \"{topico}\". Usemikíalo ya mbéni ye lukangulu lwak’úkati.
+                """
+
+    if idioma == 'umbundu':
+        return f"""
+                    Eyangela okuvangula vali onanjila yokutunga vesu, omanu aya: \"{topico}\". Tëngë misa ómolo ókumwe ye lukalivano lwalíya.
+                """
+
+    if idioma == 'kikongo':
+        return f"""
+                    Lambula na mosi ya buala, yina kele na mayele muke, nsangu yai: \"{topico}\". Sambila misá ya ntoto ye luvumbu luvula.
+                """
 
     return f"""Explique para um camponês com pouca escolaridade o seguinte conceito: \"{topico}\". Use exemplos rurais e linguagem simples."""
