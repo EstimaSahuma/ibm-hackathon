@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Form, UploadFile, File
+from fastapi.middleware.cors import CORSMiddleware
 from utils.watsonx_client import get_granite_response
 from utils.extract_text import extract_text_image
 from pronpts.prompt_generator import ( 
@@ -11,12 +12,21 @@ from pathlib import Path
 
 app = FastAPI()
 
+# CORS configuration (adjust as needed for deployment)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 @app.post("/presentation/")
 def presentation():
     return {"response": prompt_message_presentation()}
 
 @app.post("/open-account/")
-def open_account(msg: str = Form(...), lang: str = Form('pt')):
+def open_account(msg: str = Form(...), lang: str = Form(...)):
     prompt = prompt_open_account(msg, lang)
     resposta = get_granite_response(prompt)
     return {"response": resposta}
