@@ -32,13 +32,13 @@ def open_account(msg: str = Form(...), lang: str = Form(...)):
     return {"response": resposta}
 
 @app.post("/agri-credit/")
-def agri_credit(msg: str = Form(...), lang: str = Form('pt')):
+def agri_credit(msg: str = Form(...), lang: str = Form(...)):
     prompt = prompt_agri_credit(msg, lang)
     resposta = get_granite_response(prompt)
     return {"response": resposta}
 
 @app.post("/process-simulation/")
-def process_simulation(msg: str = Form(...), lang: str = Form('pt')):
+def process_simulation(msg: str = Form(...), lang: str = Form(...)):
     prompt = prompt_agri_credit(msg, lang)
     resposta = get_granite_response(prompt)
     solicitacao_doc = "envie seu BI" in resposta.lower() or "documento" in resposta.lower()
@@ -49,14 +49,20 @@ def process_simulation(msg: str = Form(...), lang: str = Form('pt')):
     }
 
 @app.post("/financial-education/")
-def financial_education(topico: str = Form(...), lang: str = Form('pt')):
-    prompt = prompt_financial_education(topico, lang)
+def financial_education(msg: str = Form(...), lang: str = Form(...)):
+    print(msg)
+    print(lang)
+    prompt = prompt_financial_education(msg, lang)
     resposta = get_granite_response(prompt)
     return {"response": resposta}
 
 @app.post("/upload-documento/")
-def upload_documento(file: UploadFile = File(...), lang: str = Form('pt')):
+def upload_documento(file: UploadFile = File(...), lang: str = Form(...)):
     conteudo = file.file.read()
+
+    # Garante que a pasta 'temp/' existe
+    Path("temp").mkdir(parents=True, exist_ok=True)
+
     path = Path(f"temp/{file.filename}")
     with open(path, "wb") as f:
         f.write(conteudo)

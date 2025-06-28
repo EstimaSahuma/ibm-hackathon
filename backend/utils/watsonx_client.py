@@ -31,7 +31,7 @@ def get_granite_response(prompt: str) -> str:
             "top_k": 50,
             "top_p": 0.85,
             "repetition_penalty": 1.05,
-            "max_tokens": 500
+            "max_tokens": 200
         }
     )
     return resp['choices'][0]['message']['content']
