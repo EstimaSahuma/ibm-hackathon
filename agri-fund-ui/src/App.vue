@@ -2,7 +2,7 @@
   <div class="min-h-screen bg-white text-black font-sans">
     <header class="bg-green-600 text-white py-4 px-6 shadow-md flex flex-col sm:flex-row sm:justify-between sm:items-center">
       <div>
-        <h1 class="text-2xl font-bold">AgriBank Assist</h1>
+        <h1 class="text-2xl font-bold">Agri Fund Assist</h1>
         <p class="text-sm">Inclusão bancária inteligente para camponeses</p>
       </div>
       <select v-model="idioma" class="mt-2 sm:mt-0 bg-green-700 text-white px-3 py-1 rounded">
