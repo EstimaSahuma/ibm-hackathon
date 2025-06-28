@@ -1,27 +1,75 @@
 def prompt_message_presentation() -> str:
     return f"""
-        👋🏾 Olá! Eu sou o *AgriBank Assist*, seu assistente digital para apoio bancário rural. Posso ajudar com:
-
-        ✅ Abrir conta com BI ou Cartão de Agricultor  
-        ✅ Pedir crédito agrícola para suas plantações  
-        ✅ Explicar taxas, serviços e documentos  
-
-        Pode escrever em português simples ou nas línguas locais (Kimbundu, Umbundu...). Vamos começar?
+        'pt': "👋🏾 Olá! Eu sou o AgriBank Assist, seu assistente digital bancário rural.",
+        'en': "👋🏾 Hello! I am AgriBank Assist, your rural banking digital assistant.",
+        'kimbundu': "👋🏾 Ngevu! Mono ke AgriBank Assist, mudimu wakwetu na banku.",
+        'umbundu': "👋🏾 Olá! Ohandi AgriBank Assist, okapayi koku banku lyoku camponês.",
+        'kikongo': "👋🏾 Mbote! Mono ke AgriBank Assist, mosungi wa banku ya bilanga."
     """
 
-def prompt_open_account(user_msg: str) -> str:
-    return f"""O camponês diz: "{user_msg}"
+def prompt_open_account(user_msg: str, idioma: str = 'pt') -> str:
+    if idioma == 'en':
+        return f"""The farmer says: "{user_msg}"
 
-            Explique como ele pode abrir uma conta bancária com BI ou Cartão de Agricultor. Use linguagem simples.
+            Provide a simple explanation on how to open a bank account using a Farmer ID or National ID.
         """
-
-def prompt_agri_credit(user_msg: str) -> str:
-    return f"""O agricultor diz: "{user_msg}"
-
-        Explique como funciona o processo de solicitação de crédito agrícola e quais dados ele deve fornecer.
-    """
     
-def prompt_open_account_kimbundu(user_msg: str) -> str:
+    if idioma == 'kimbundu':
+        return f"""Traduza a seguinte frase para Kimbundu e depois explique como abrir uma conta rural: "{user_msg}"
+
+                    Exemplo:
+                    Português: Para abrir uma conta, leve seu BI ou Cartão de Agricultor.
+                    Kimbundu: K’u sole kufuta conta, kalukila BI wela kartão dia mufundi.
+                """
+
+    if idioma == 'umbundu':
+        return f"""Traduza para Umbundu e explique como abrir uma conta com BI ou Cartão de Agricultor:
+                    \"{user_msg}\"
+
+                    Exemplo:
+                    Português: Leve seu BI ou Cartão de Agricultor.
+                    Umbundu: Feteka okuti BI wela ekartão lyocikola.
+                """
+
+    if idioma == 'kikongo':
+        return f"""Explique em Kikongo como abrir uma conta bancária com BI ou cartão de agricultor: \"{user_msg}\"
+
+                    Exemplo:
+                    Português: Para abrir uma conta, traga seu documento.
+                    Kikongo: Kana kufungula compte, lela na documentu yako.
+                """
+
+    return f"""O camponês diz: \"{user_msg}\"
+
+                Explique como ele pode abrir uma conta bancária com BI ou Cartão de Agricultor. Use linguagem simples.
+            """
+
+def prompt_agri_credit(user_msg: str, idioma: str = 'pt') -> str:
+    if idioma == 'en':
+        return f"""The farmer says: \"{user_msg}\"
+
+                    Explain how to apply for agricultural credit, including which documents are required.
+                """
+    
+    if idioma == 'kimbundu':
+        return f"""
+                    Traduza a frase e explique em Kimbundu como pedir crédito agrícola com documentos mínimos: \"{user_msg}\"
+                """
+
+    if idioma == 'umbundu':
+        return f"""
+                    Explique em Umbundu como funciona o crédito agrícola e quais documentos são necessários: \"{user_msg}\"
+                """
+
+    if idioma == 'kikongo':
+        return f"""Explique como o camponês pode conseguir crédito agrícola em Kikongo, com linguagem acessível: \"{user_msg}\""""
+
+    return f"""O agricultor diz: \"{user_msg}\"
+
+                Explique como funciona o processo de solicitação de crédito agrícola e quais documentos ele deve fornecer.
+            """
+    
+def prompt_open_account_kimbundu(user_msg: str, lang: str = 'pt') -> str:
     return f"""
         O camponês diz em Kimbundu: "{user_msg}"
 
@@ -33,16 +81,11 @@ def prompt_open_account_kimbundu(user_msg: str) -> str:
         Kimbundu: "K'u sole kufuta conta, kalukila BI wela kartão dia mufundi."
     """
     
-def prompt_financial_education(topico: str) -> str:
-    return f"""
-        Explique de forma clara e acessível para um camponês com pouca literacia financeira o que significa: "{topico}".
+def prompt_financial_education(topico: str, idioma: str = 'pt') -> str:
+    if idioma == 'en':
+        return f"""Explain the concept \"{topico}\" in simple English, using rural/agriculture-related examples."""
 
-        Use exemplos da vida rural (plantio, colheita, venda no mercado) e linguagem simples.
-    """
+    if idioma in ['kimbundu', 'umbundu', 'kikongo']:
+        return f"""Explique o seguinte conceito em {idioma.upper()}, de forma simples e com exemplos agrícolas: \"{topico}\""""
 
-def prompt_translation_kimbundu(frase: str) -> str:
-    return f"""
-        Traduza esta frase para Kimbundu: "{frase}"
-
-        Se possível, mantenha a estrutura original da frase.
-    """
+    return f"""Explique para um camponês com pouca escolaridade o seguinte conceito: \"{topico}\". Use exemplos rurais e linguagem simples."""
