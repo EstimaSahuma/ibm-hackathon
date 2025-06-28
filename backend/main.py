@@ -6,7 +6,6 @@ from pronpts.prompt_generator import (
                                       prompt_agri_credit,
                                        prompt_message_presentation,
                                        prompt_financial_education,
-                                       prompt_translation_kimbundu
                                       )
 from pathlib import Path
 
@@ -17,20 +16,20 @@ def presentation():
     return {"response": prompt_message_presentation()}
 
 @app.post("/open-account/")
-def open_account(msg: str = Form(...)):
-    prompt = prompt_open_account(msg)
+def open_account(msg: str = Form(...), lang: str = Form('pt')):
+    prompt = prompt_open_account(msg, lang)
     resposta = get_granite_response(prompt)
     return {"response": resposta}
 
 @app.post("/agri-credit/")
-def agri_credit(msg: str = Form(...)):
-    prompt = prompt_agri_credit(msg)
+def agri_credit(msg: str = Form(...), lang: str = Form('pt')):
+    prompt = prompt_agri_credit(msg, lang)
     resposta = get_granite_response(prompt)
     return {"response": resposta}
 
 @app.post("/process-simulation/")
-def process_simulation(msg: str = Form(...)):
-    prompt = prompt_agri_credit(msg)
+def process_simulation(msg: str = Form(...), lang: str = Form('pt')):
+    prompt = prompt_agri_credit(msg, lang)
     resposta = get_granite_response(prompt)
     solicitacao_doc = "envie seu BI" in resposta.lower() or "documento" in resposta.lower()
     return {
@@ -40,23 +39,17 @@ def process_simulation(msg: str = Form(...)):
     }
 
 @app.post("/financial-education/")
-def financial_education(topico: str = Form(...)):
-    prompt = prompt_financial_education(topico)
-    resposta = get_granite_response(prompt)
-    return {"response": resposta}
-
-@app.post("/translation-kimbundu/")
-def translation_kimbundu(frase: str = Form(...)):
-    prompt = prompt_translation_kimbundu(frase)
+def financial_education(topico: str = Form(...), lang: str = Form('pt')):
+    prompt = prompt_financial_education(topico, lang)
     resposta = get_granite_response(prompt)
     return {"response": resposta}
 
 @app.post("/upload-documento/")
-def upload_documento(file: UploadFile = File(...)):
+def upload_documento(file: UploadFile = File(...), lang: str = Form('pt')):
     conteudo = file.file.read()
     path = Path(f"temp/{file.filename}")
     with open(path, "wb") as f:
         f.write(conteudo)
     
-    texto = extract_text_image(path)
+    texto = extract_text_image(path, lang)
     return {"texto_extraido": texto}
