@@ -107,6 +107,14 @@ npm run dev
 Want to help translate to more African languages?  
 Feel free to fork and submit pull requests!
 
+Contributions are what make the open source community such an amazing place to learn, be inspired, and create. Any contributions you make will be **greatly appreciated.**.
+
+1.  Fork the project.
+2.  Create a **Branch** for your feature (`git checkout -b feature/AmazingFeature`).
+3.  **Commit** your changes (`git commit -m 'Add some AmazingFeature'`).
+4.  Push to Branch (`git push origin feature/AmazingFeature`).
+5.  Open a **Pull Request**.
+
 ---
 
 ## 🔐 License
